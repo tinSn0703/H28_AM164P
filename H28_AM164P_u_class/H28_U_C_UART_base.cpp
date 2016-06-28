@@ -19,7 +19,7 @@ class C_UART_base
 	void Set_uart_base_addr(E_UART_ADDR );
 	void Set_uart_base_mode(E_UART_MODE );
 	
-	E_UART_ADDR Ret_uart_base_addr()		{	return _mem_uart_base_addr;	}
+	E_UART_ADDR Ret_uart_base_addr()	{	return _mem_uart_base_addr;	}
 	E_UART_MODE Ret_uart_base_mode()	{	return _mem_uart_base_mode;	}
 
 	#define UCSRA _SFR_MEM8(Ret_uart_base_addr() + 0)
