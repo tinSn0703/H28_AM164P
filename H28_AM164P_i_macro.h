@@ -18,14 +18,14 @@ enum E_IO_PORT_ADDR
 
 enum E_IO_NUM
 {
-	EI_IO0,
-	EI_IO1,
-	EI_IO2,
-	EI_IO3,
-	EI_IO4,
-	EI_IO5,
-	EI_IO6,
-	EI_IO7,	
+	EI_IO0 = 0,
+	EI_IO1 = 1,
+	EI_IO2 = 2,
+	EI_IO3 = 3,
+	EI_IO4 = 4,
+	EI_IO5 = 5,
+	EI_IO6 = 6,
+	EI_IO7 = 7,	
 };
 
 enum E_AD_NUM
