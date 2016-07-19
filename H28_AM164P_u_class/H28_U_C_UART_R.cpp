@@ -28,10 +28,24 @@ class C_UART_R : public virtual C_UART_base , public C_TIMER_inside
 	T_DATA In();
 
 	E_UART_FLAG Ret_flag()	{	return _mem_uart_r_flag_in;	}
+		
+	friend void operator >> (C_UART_R &, T_DATA &);
 };
 
 //protevted
-inline void C_UART_R::Set(E_UART_ADDR _arg_uart_r_addr, E_LOGIC _arg_uart_r_nf_isr)
+inline void 
+C_UART_R::
+Set
+(
+	E_UART_ADDR _arg_uart_r_addr, 
+	E_LOGIC _arg_uart_r_nf_isr
+)
+/*
+コンストラクタの中身みたいなもの。中身をまるっとコンストラクタに移してもいいかもしれない
+
+	_arg_uart_r_addr : UARTの番号
+	_arg_uart_r_nf_isr : 割り込み処理のONOFF
+*/
 {
 	Set_base(_arg_uart_r_addr,EU_REC);
 	
@@ -45,7 +59,17 @@ inline void C_UART_R::Set(E_UART_ADDR _arg_uart_r_addr, E_LOGIC _arg_uart_r_nf_i
 }
 
 //public
-inline C_UART_R::C_UART_R(E_UART_ADDR _arg_uart_r_addr, E_LOGIC _arg_uart_r_nf_isr = FALES)
+inline 
+C_UART_R::
+C_UART_R
+(
+	E_UART_ADDR _arg_uart_r_addr, 
+	E_LOGIC _arg_uart_r_nf_isr = FALES
+)
+/*
+	_arg_uart_r_addr : UARTの番号
+	_arg_uart_r_nf_isr : 割り込み処理のONOFF
+*/
 {	
 	Set(_arg_uart_r_addr,_arg_uart_r_nf_isr);
 }
@@ -99,4 +123,16 @@ T_DATA C_UART_R::In()
 	
 	return _ret_data;
 }
+
+void 
+operator >>
+(
+	C_UART_R &_arg_uart_r,
+	T_DATA &_arg_uart_r_in_data
+)
+{
+	_arg_uart_r_in_data = _arg_uart_r.In();
+}
+
+
 #endif
