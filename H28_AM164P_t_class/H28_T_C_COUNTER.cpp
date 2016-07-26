@@ -5,38 +5,39 @@
  H28 05 16 ver1.0.0 classにした。何となく使いづらいので要改造。特にflagやcountを行うあたり
 */
 
-#ifndef _H28_T_C_COUNTER_CPP_
-#define _H28_T_C_COUNTER_CPP_ 1
+#pragma once
+
+#include "H28_AM164P_t_class.h"
 
 class C_COUNTER
 {
 	private:
 	T_COUNT _mem_counter_count;	//カウントの回数
-	E_LOGIC _mem_counter_nf :1;	//カウントのONOFF
+	BOOL _mem_counter_nf :1;	//カウントのONOFF
 	T_VALUE _mem_counter_limit;	//カウントの上限
 	
 	public:
 	C_COUNTER()	{}	
-	C_COUNTER(T_VALUE ,T_COUNT ,E_LOGIC );
+	C_COUNTER(T_VALUE ,T_COUNT ,BOOL );
 	
-	E_LOGIC Ret_flag()	{	return _mem_counter_nf;		}
+	BOOL Ret_flag()	{	return _mem_counter_nf;		}
 	T_COUNT Ret_count()	{	return _mem_counter_count;	}
 	T_VALUE Ret_limit()	{	return _mem_counter_limit;	}
 	
 	void Flag_up();
 	void Flag_down();
 	
-	E_LOGIC Count();
+	BOOL Count();
 	void Count_up();
 	void Count_down();
 	void Count_reset();	
 	
-	E_LOGIC Check_limit();
+	BOOL Check_limit();
 	
 	void End();
 };
 
-inline C_COUNTER::C_COUNTER(T_VALUE _arg_counter_limit, T_COUNT _arg_counter_count = 0, E_LOGIC _arg_counter_nf = FALES)
+inline C_COUNTER::C_COUNTER(T_VALUE _arg_counter_limit, T_COUNT _arg_counter_count = 0, BOOL _arg_counter_nf = FALES)
 {
 	_mem_counter_count = _arg_counter_count;
 	_mem_counter_nf  = _arg_counter_nf;
@@ -53,7 +54,7 @@ inline void C_COUNTER::Flag_down()
 	_mem_counter_nf = FALES;
 }
 
-E_LOGIC C_COUNTER::Count()
+BOOL C_COUNTER::Count()
 {
 	if (_mem_counter_nf == TRUE)
 	{
@@ -80,7 +81,7 @@ inline void C_COUNTER::Count_down()
 	_mem_counter_count --;
 }
 
-inline E_LOGIC C_COUNTER::Check_limit()
+inline BOOL C_COUNTER::Check_limit()
 {
 	if (_mem_counter_count == _mem_counter_limit)	return TRUE;
 	
@@ -97,5 +98,3 @@ inline void C_COUNTER::End()
 	_mem_counter_count = 0;
 	_mem_counter_nf = FALES;
 }
-
-#endif

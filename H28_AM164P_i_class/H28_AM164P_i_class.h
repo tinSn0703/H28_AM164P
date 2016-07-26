@@ -1,9 +1,8 @@
 
-#ifndef _H28_AM164P_I_CLASS_H_
-#define _H28_AM164P_I_CLASS_H_ 1
+#pragma once
 
-#ifndef _H28_AM164P_H_
-#error "Include <H28_AM164P.h>"
+#ifndef _H28_AVR_H_
+#	error "Include <H28_AVR.h>"
 #endif
 
 #include "H28_I_C_IO_base.cpp"
@@ -15,5 +14,3 @@
 #include "H28_I_C_IO.cpp"
 //#include "H28_I_C_IO_adju.cpp"
 #include "H28_I_C_AD.cpp"
-
-#endif

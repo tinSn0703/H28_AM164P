@@ -6,8 +6,7 @@ OUTのみのIO系のクラス
  H28 05 22 ver1.0.0 C_IO_baseのバージョンアップへの対応
 */
 
-#ifndef _H28_I_C_IO_OUT_CPP_
-#define _H28_I_C_IO_OUT_CPP_ 1
+#pragma once
 
 #include "H28_I_C_IO_base.cpp"
 
@@ -70,5 +69,3 @@ void C_IO_OUT::Out_num_off(E_IO_NUM _arg_io_out_off_num_bit)
 {
 	PORT &= ~(1 << _arg_io_out_off_num_bit);
 }
-
-#endif

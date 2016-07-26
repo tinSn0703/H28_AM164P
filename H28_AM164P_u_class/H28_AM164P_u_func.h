@@ -1,6 +1,7 @@
 
-#ifndef _H28_AM164P_U_FUNC_H_
-#define _H28_AM164P_U_FUNC_H_ 1
+#pragma once
+
+#include "H28_AM164P_u_class.h"
 
 #define UCSRA_F(_def_addr)	_SFR_MEM8(_def_addr + 0)
 #define UCSRB_F(_def_addr)	_SFR_MEM8(_def_addr + 1)
@@ -54,7 +55,7 @@ void F_Set_uart(E_UART_ADDR _arg_uart_addr)
 	UCSRC_F(_arg_uart_addr) = ((1<<UPM1) | (1<<UPM0) | (1<<UCSZ1) | (1<<UCSZ0));
 }
 
-void F_Set_usrt_bit9(E_UART_ADDR _arg_uart_addr, E_LOGIC _arg_uart_nf_bit9)
+void F_Set_usrt_bit9(E_UART_ADDR _arg_uart_addr, BOOL _arg_uart_nf_bit9)
 {
 	switch (_arg_uart_nf_bit9)
 	{
@@ -63,7 +64,7 @@ void F_Set_usrt_bit9(E_UART_ADDR _arg_uart_addr, E_LOGIC _arg_uart_nf_bit9)
 	}
 }
 
-void F_Set_uart_isr(E_UART_ADDR _arg_uart_addr, E_UART_MODE _arg_uart_mode, E_LOGIC _arg_uart_nf_isr)
+void F_Set_uart_isr(E_UART_ADDR _arg_uart_addr, E_UART_MODE _arg_uart_mode, BOOL _arg_uart_nf_isr)
 {
 	uchar _tenp_bit = 0;
 	
@@ -115,5 +116,3 @@ T F_In_uart(E_UART_ADDR _arg_uart_addr)
 	
 	return _ret_data;
 }
-
-#endif

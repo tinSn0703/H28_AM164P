@@ -6,8 +6,7 @@
  H28 05 23 ver 0.2.0 C_UART_baseの改造に合わせた
 */
 
-#ifndef _H28_U_C_UART_R_CPP_
-#define _H28_U_C_UART_R_CPP_ 1
+#pragma once
 
 #include "H28_U_C_UART_base.cpp"
 
@@ -17,13 +16,13 @@ class C_UART_R : public virtual C_UART_base , public C_TIMER_inside
 	E_UART_FLAG _mem_uart_r_flag_in :2; //最後の受信状態の記録
 	
 	protected:	
-	void Set(E_UART_ADDR ,E_LOGIC );
+	void Set(E_UART_ADDR ,BOOL );
 	
 	public:
 	C_UART_R() {}
-	C_UART_R(E_UART_ADDR ,E_LOGIC );
+	C_UART_R(E_UART_ADDR ,BOOL );
 	
-	void Set_isr(E_LOGIC );
+	void Set_isr(BOOL );
 	void Check();
 	T_DATA In();
 
@@ -38,7 +37,7 @@ C_UART_R::
 Set
 (
 	E_UART_ADDR _arg_uart_r_addr, 
-	E_LOGIC _arg_uart_r_nf_isr
+	BOOL _arg_uart_r_nf_isr
 )
 /*
 コンストラクタの中身みたいなもの。中身をまるっとコンストラクタに移してもいいかもしれない
@@ -64,7 +63,7 @@ C_UART_R::
 C_UART_R
 (
 	E_UART_ADDR _arg_uart_r_addr, 
-	E_LOGIC _arg_uart_r_nf_isr = FALES
+	BOOL _arg_uart_r_nf_isr = FALES
 )
 /*
 	_arg_uart_r_addr : UARTの番号
@@ -74,7 +73,7 @@ C_UART_R
 	Set(_arg_uart_r_addr,_arg_uart_r_nf_isr);
 }
 
-inline void C_UART_R::Set_isr(E_LOGIC _arg_uart_r_nf_isr)
+inline void C_UART_R::Set_isr(BOOL _arg_uart_r_nf_isr)
 {
 	switch (_arg_uart_r_nf_isr)
 	{
@@ -133,6 +132,3 @@ operator >>
 {
 	_arg_uart_r_in_data = _arg_uart_r.In();
 }
-
-
-#endif

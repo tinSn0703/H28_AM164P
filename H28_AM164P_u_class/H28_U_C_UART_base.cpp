@@ -5,29 +5,23 @@ UART系の基底となるクラス。こいつは宣言しないでね
  H28 05 23 ver0.1.0 コンストラクタ消しといた。
 */
 
-#ifndef _H28_U_C_UART_BASE_CPP_
-#define _H28_U_C_UART_BASE_CPP_ 1
+#pragma once
+
+#include "H28_AM164P_u_class.h"
 
 class C_UART_base
 {
-	private:
-	E_UART_ADDR _mem_uart_base_addr :8;	//レジスタ用のアドレス
-	E_UART_MODE _mem_uart_base_mode :1;	//モードの記録
-	
 	protected:
 	
-	void Set_uart_base_addr(E_UART_ADDR );
-	void Set_uart_base_mode(E_UART_MODE );
-	
-	E_UART_ADDR Ret_uart_base_addr()	{	return _mem_uart_base_addr;	}
-	E_UART_MODE Ret_uart_base_mode()	{	return _mem_uart_base_mode;	}
+	E_UART_ADDR _mem_uart_base_addr :8;	//レジスタ用のアドレス
+	E_UART_MODE _mem_uart_base_mode :1;	//モードの記録	
 
-	#define UCSRA _SFR_MEM8(Ret_uart_base_addr() + 0)
-	#define UCSRB _SFR_MEM8(Ret_uart_base_addr() + 1)
-	#define UCSRC _SFR_MEM8(Ret_uart_base_addr() + 2)
-	#define UBRRL _SFR_MEM8(Ret_uart_base_addr() + 4)
-	#define UBRRH _SFR_MEM8(Ret_uart_base_addr() + 5)
-	#define UDR	  _SFR_MEM8(Ret_uart_base_addr() + 6)
+	#define UCSRA _SFR_MEM8(_mem_uart_base_addr + 0)
+	#define UCSRB _SFR_MEM8(_mem_uart_base_addr + 1)
+	#define UCSRC _SFR_MEM8(_mem_uart_base_addr + 2)
+	#define UBRRL _SFR_MEM8(_mem_uart_base_addr + 4)
+	#define UBRRH _SFR_MEM8(_mem_uart_base_addr + 5)
+	#define UDR	  _SFR_MEM8(_mem_uart_base_addr + 6)
 	
 	/*bit UCSRA*/
 	#define RXC  7
@@ -62,25 +56,14 @@ class C_UART_base
 	void Set_base(E_UART_ADDR ,E_UART_MODE );
 
 	public:
-	void Set_bit9(E_LOGIC );
-	E_LOGIC Ret_bit9()	{	return CHECK_BIT_TF(UCSRB,UCSZ2);	}
+	void Set_bit9(BOOL );
+	BOOL Ret_bit9()	{	return CHECK_BIT_TF(UCSRB,UCSZ2);	}
 };
-
-//protected
-inline void C_UART_base::Set_uart_base_addr(E_UART_ADDR _arg_uart_base_addr)
-{
-	_mem_uart_base_addr = _arg_uart_base_addr;
-}
-
-inline void C_UART_base::Set_uart_base_mode(E_UART_MODE _arg_uart_base_mode)
-{
-	_mem_uart_base_mode = _arg_uart_base_mode;
-}
 
 inline void C_UART_base::Set_base(E_UART_ADDR _arg_uart_base_addr, E_UART_MODE _arg_uart_base_mode)
 {
-	Set_uart_base_addr(_arg_uart_base_addr);
-	Set_uart_base_mode(_arg_uart_base_mode);
+	_mem_uart_base_addr = _arg_uart_base_addr;
+	_mem_uart_base_mode = _arg_uart_base_mode;
 	
 	UBRRH = 0x00;
 	UBRRL = 0x04;
@@ -97,7 +80,7 @@ inline void C_UART_base::Set_base(E_UART_ADDR _arg_uart_base_addr, E_UART_MODE _
 }
 
 //public
-inline void C_UART_base::Set_bit9(E_LOGIC _arg_uart_base_nf_bit9)
+inline void C_UART_base::Set_bit9(BOOL _arg_uart_base_nf_bit9)
 {
 	switch (_arg_uart_base_nf_bit9)
 	{
@@ -105,5 +88,3 @@ inline void C_UART_base::Set_bit9(E_LOGIC _arg_uart_base_nf_bit9)
 		case FALES:	UCSRB &= ~(1 << UCSZ2);	break; //Off
 	}
 }
-
-#endif

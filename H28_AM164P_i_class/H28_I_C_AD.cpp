@@ -9,8 +9,9 @@ AD変換を行うクラス。ポテンジョンメータの値を読むことが
  H28 05 22 ver2.0.0   メンバ変数をカプセル化した。
 */
 
-#ifndef _H28_I_C_AD_CPP_
-#define _H28_I_C_AD_CPP_ 1
+#pragma once
+
+#include "H28_AM164P_i_class.h"
 
 class C_AD
 {	
@@ -19,11 +20,11 @@ class C_AD
 	{
 		struct S_AD_MUX
 		{
-			E_LOGIC mux0 :1;
-			E_LOGIC mux1 :1;
-			E_LOGIC mux2 :1;
-			E_LOGIC mux3 :1;
-			E_LOGIC mux4 :1;
+			BOOL mux0 :1;
+			BOOL mux1 :1;
+			BOOL mux2 :1;
+			BOOL mux3 :1;
+			BOOL mux4 :1;
 		};
 		
 		S_AD_MUX mux_bit;
@@ -33,22 +34,21 @@ class C_AD
 	U_AD_MUX _mem_ad_num;
 	
 	protected:	
-	E_LOGIC Ret_mux0()	{	return _mem_ad_num.mux_bit.mux0;	}
-	E_LOGIC Ret_mux1()	{	return _mem_ad_num.mux_bit.mux1;	}
-	E_LOGIC Ret_mux2()	{	return _mem_ad_num.mux_bit.mux2;	}
-	E_LOGIC Ret_mux3()	{	return _mem_ad_num.mux_bit.mux3;	}
-	E_LOGIC Ret_mux4()	{	return _mem_ad_num.mux_bit.mux4;	}
-	usint Ret_admux()	{	return _mem_ad_num.mux_admux;		}
-	E_AD_NUM Ret_num()	{	return _mem_ad_num.mux_admux;			}
+	BOOL Ret_mux0()		{	return _mem_ad_num.mux_bit.mux0;	}
+	BOOL Ret_mux1()		{	return _mem_ad_num.mux_bit.mux1;	}
+	BOOL Ret_mux2()		{	return _mem_ad_num.mux_bit.mux2;	}
+	BOOL Ret_mux3()		{	return _mem_ad_num.mux_bit.mux3;	}
+	BOOL Ret_mux4()		{	return _mem_ad_num.mux_bit.mux4;	}
+	E_AD_NUM Ret_admux()	{	return _mem_ad_num.mux_admux;		}
 	
 	void Set_num(E_AD_NUM );
 	
 	void Set_first();
-	void Set(E_AD_NUM ,E_LOGIC );
+	void Set(E_AD_NUM ,BOOL );
 	
 	public:
 	C_AD()	{}
-	C_AD(E_AD_NUM ,E_LOGIC );
+	C_AD(E_AD_NUM ,BOOL );
 
 	usint Do();
 };
@@ -61,7 +61,7 @@ inline void C_AD::Set_num(E_AD_NUM _arg_ad_num)
 
 inline void C_AD::Set_first()
 {
-	static E_LOGIC _static_ad_first = FALES;
+	static BOOL _static_ad_first = FALES;
 	
 	if (_static_ad_first == FALES)
 	{
@@ -74,7 +74,7 @@ inline void C_AD::Set_first()
 	}
 }
 
-inline void C_AD::Set(E_AD_NUM _arg_ad_num, E_LOGIC _arg_ad_io_turn = TRUE)
+inline void C_AD::Set(E_AD_NUM _arg_ad_num, BOOL _arg_ad_io_turn = TRUE)
 {
 	Set_first();
 	
@@ -102,7 +102,7 @@ inline void C_AD::Set(E_AD_NUM _arg_ad_num, E_LOGIC _arg_ad_io_turn = TRUE)
 }
 
 //public
-inline C_AD::C_AD(E_AD_NUM _arg_ad_num, E_LOGIC _arg_ad_io_turn = TRUE)
+inline C_AD::C_AD(E_AD_NUM _arg_ad_num, BOOL _arg_ad_io_turn = TRUE)
 {	
 	Set(_arg_ad_num, _arg_ad_io_turn);
 }
@@ -123,5 +123,3 @@ inline usint C_AD::Do()
 	
 	return _ret_data;
 }
-
-#endif

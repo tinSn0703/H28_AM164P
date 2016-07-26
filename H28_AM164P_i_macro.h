@@ -1,10 +1,7 @@
 
-#ifndef _H28_AM164P_I_MACRO_H_
-#define _H28_AM164P_I_MACRO_H_ 1
+#pragma once
 
-#ifndef _H28_AM164P_H_
-#error "Include <H28_AM164P.h>"
-#endif
+#include "H28_AM164P.h"
 
 typedef unsigned char T_PORT;
 
@@ -49,5 +46,3 @@ enum E_IO_MODE
 };
 
 #include "H28_AM164P_i_class/H28_AM164P_i_class.h"
-
-#endif /*_H28_AM640_I_MACRO_H_*/

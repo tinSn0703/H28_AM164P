@@ -1,13 +1,11 @@
 
-#ifndef _H28_AM164P_U_MACRO_H_
-#define _H28_AM164P_U_MACRO_H_ 1
+#pragma once
 
-#ifndef _H28_AM164P_H_
-#error "Include <H28_AM164P.h>"
-#endif
+#include "H28_AM164P.h"
 
 /*UART*/
 typedef unsigned short int T_DATA;
+typedef unsigned char T_DATA_8;
 
 #define IN_ERROR 0xfff 
 //このマクロは12bit以上ないと使えないから気を付けろよ。by H28 May 13のSn
@@ -33,9 +31,5 @@ enum E_UART_MODE
 	EU_REC, //receive  mode
 };
 
-/************************************************************************/
 #include "H28_AM164P_u_class/H28_AM164P_u_class.h"
 #include "H28_AM164P_u_class/H28_AM164P_u_func.h"
-/************************************************************************/
-
-#endif /*_H28_AM640_U_MACRO_H_*/

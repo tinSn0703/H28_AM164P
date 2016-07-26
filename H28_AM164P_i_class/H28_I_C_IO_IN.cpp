@@ -6,8 +6,7 @@ INのみ可能なIO系のクラス
  H28 05 22 ver1.0.0 C_IO_baseのバージョンアップへの対応
 */
 
-#ifndef _H28_I_C_IO_IN_CPP_
-#define _H28_I_C_IO_IN_CPP_ 1
+#pragma once
 
 #include "H28_I_C_IO_base.cpp"
 
@@ -22,10 +21,10 @@ class C_IO_IN : public virtual C_IO_base
 	C_IO_IN(E_IO_PORT_ADDR ,T_PORT );
 
 	T_PORT In();
-	E_LOGIC In_num(E_IO_NUM );
+	BOOL In_num(E_IO_NUM );
 	
 	T_PORT In_turn();
-	E_LOGIC In_turn_num(E_IO_NUM );
+	BOOL In_turn_num(E_IO_NUM );
 };
 
 //protected
@@ -50,7 +49,7 @@ inline T_PORT C_IO_IN::In()
 	return (T_PORT)PIN;
 }
 
-inline E_LOGIC C_IO_IN::In_num(E_IO_NUM _arg_io_in_num_bit)
+inline BOOL C_IO_IN::In_num(E_IO_NUM _arg_io_in_num_bit)
 {
 	return CHECK_BIT_TF(PIN, _arg_io_in_num_bit);
 }
@@ -60,9 +59,7 @@ inline T_PORT C_IO_IN::In_turn()
 	return (T_PORT)(~PIN);
 }
 
-inline E_LOGIC C_IO_IN::In_turn_num(E_IO_NUM _arg_io_in_num_bit)
+inline BOOL C_IO_IN::In_turn_num(E_IO_NUM _arg_io_in_num_bit)
 {
 	return CHECK_BIT_TF(~PIN, _arg_io_in_num_bit);
 }
-
-#endif

@@ -9,8 +9,9 @@ IOピン用クラスの基礎。宣言しないでね。
  H28 05 23 ver1.0.3 やっぱりやめた
 */
 
-#ifndef _H28_I_C_IO_BASE_CPP_
-#define _H28_I_C_IO_BASE_CPP_ 1
+#pragma once
+
+#include "H28_AM164P_i_class.h"
 
 class C_IO_base
 {
@@ -23,7 +24,7 @@ class C_IO_base
 	void Set_base_mode(E_IO_MODE );
 	
 	E_IO_PORT_ADDR Ret_base_addr()	{	return _mem_io_base_addr;	}
-	E_IO_MODE Ret_base_mode()	{	return _mem_io_base_mode;	}
+	E_IO_MODE Ret_base_mode()		{	return _mem_io_base_mode;	}
 	
 	#define	PIN  _SFR_IO8(Ret_base_addr() + 0)
 	#define DDR  _SFR_IO8(Ret_base_addr() + 1)
@@ -77,5 +78,3 @@ inline void C_IO_base::Set_base(E_IO_PORT_ADDR _arg_io_base_addr, E_IO_MODE _arg
 		}
 	}
 }
-
-#endif

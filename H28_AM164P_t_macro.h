@@ -1,10 +1,7 @@
 
-#ifndef _H28_AM164P_T_MACRO_H_
-#define _H28_AM164P_T_MACRO_H_ 1
+#pragma once
 
-#ifndef _H28_AM164P_H_
-#error "Include <H28_AM164P.h>"
-#endif
+#include "H28_AM164P.h"
 
 typedef float T_TIME;
 
@@ -28,5 +25,3 @@ enum E_CLOCK
 };
 
 #include "H28_AM164P_t_class/H28_AM164P_t_class.h"
-
-#endif

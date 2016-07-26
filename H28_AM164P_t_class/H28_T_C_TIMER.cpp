@@ -6,49 +6,48 @@
  H28 05 20 ver 1.0.0 C_TOMER_baseに設定用の関数と変数を移し、動作系の関数の中身を持ってきた
 */
 
-#ifndef _H28_T_C_TIMER_CPP_
-#define _H28_T_C_TIMER_CPP_ 1
+#pragma once
 
 #include "H28_T_C_TIMER_base.cpp"
 
 class C_TIMER : public virtual C_TIMER_base
 {	
 	protected:
-	void Set(E_TIMER_MODE , E_LOGIC );
-	void Set(E_TIMER_MODE ,E_CLOCK ,T_VALUE ,E_LOGIC );
+	void Set(E_TIMER_MODE , BOOL );
+	void Set(E_TIMER_MODE ,E_CLOCK ,T_VALUE ,BOOL );
 	
 	public:
 	C_TIMER()	{}
-	C_TIMER(E_TIMER_MODE , E_LOGIC );
-	C_TIMER(E_TIMER_MODE ,E_CLOCK ,T_VALUE ,E_LOGIC );
+	C_TIMER(E_TIMER_MODE , BOOL );
+	C_TIMER(E_TIMER_MODE ,E_CLOCK ,T_VALUE ,BOOL );
 	
 	void Start();
 	void Start(E_CLOCK ,T_VALUE );
 	
-	E_LOGIC Flag_timer(E_LOGIC );
+	BOOL Flag_timer(BOOL );
 	
 	void Stop();
 };
 
 //protected
-inline void C_TIMER::Set(E_TIMER_MODE _arg_timer_mode, E_LOGIC _arg_timer_nf_isr = FALES)
+inline void C_TIMER::Set(E_TIMER_MODE _arg_timer_mode, BOOL _arg_timer_nf_isr = FALES)
 {
 	C_TIMER_base::Set_base(_arg_timer_mode, _arg_timer_nf_isr);
 }
 
-inline void C_TIMER::Set(E_TIMER_MODE _arg_timer_mode, E_CLOCK _arg_timer_clock, T_VALUE _arg_timer_counter, E_LOGIC _arg_timer_nf_isr = FALES)
+inline void C_TIMER::Set(E_TIMER_MODE _arg_timer_mode, E_CLOCK _arg_timer_clock, T_VALUE _arg_timer_counter, BOOL _arg_timer_nf_isr = FALES)
 {
 	C_TIMER_base::Set_base(_arg_timer_mode, _arg_timer_nf_isr);
 	C_TIMER_base::Set_condition(_arg_timer_clock, _arg_timer_counter);
 }
 
 //public
-inline C_TIMER::C_TIMER(E_TIMER_MODE _arg_timer_mode, E_LOGIC _arg_timer_nf_isr = FALES)
+inline C_TIMER::C_TIMER(E_TIMER_MODE _arg_timer_mode, BOOL _arg_timer_nf_isr = FALES)
 {
 	Set(_arg_timer_mode, _arg_timer_nf_isr);
 }
 
-inline C_TIMER::C_TIMER(E_TIMER_MODE _arg_timer_mode, E_CLOCK _arg_timer_clock, T_VALUE _arg_timer_counter, E_LOGIC _arg_timer_nf_isr = FALES)
+inline C_TIMER::C_TIMER(E_TIMER_MODE _arg_timer_mode, E_CLOCK _arg_timer_clock, T_VALUE _arg_timer_counter, BOOL _arg_timer_nf_isr = FALES)
 {
 	Set(_arg_timer_mode, _arg_timer_clock, _arg_timer_counter, _arg_timer_nf_isr);
 }
@@ -75,7 +74,7 @@ inline void C_TIMER::Start(E_CLOCK _arg_timer_clock, T_VALUE _arg_timer_counter)
 	TCCR1B |= _arg_timer_clock;
 }
 
-E_LOGIC C_TIMER::Flag_timer(E_LOGIC _arg_timer_continue = TRUE)
+BOOL C_TIMER::Flag_timer(BOOL _arg_timer_continue = TRUE)
 {
 	usint mode_bit = 0;
 	
@@ -102,5 +101,3 @@ inline void C_TIMER::Stop()
 {
 	TCCR1B &= ~TIME_SET_BIT;
 }
-
-#endif

@@ -5,8 +5,7 @@
  H28 06 12 ver0.0.0 
 */
 
-#ifndef _H28_I_C_IO_IN_PIN_CPP_
-#define _H28_I_C_IO_IN_PIN_CPP_ 1
+#pragma once
 
 #include "H28_I_C_IO_IN.cpp"
 
@@ -22,8 +21,8 @@ class C_IO_IN_pin : protected C_IO_IN
 	C_IO_IN_pin()	{}
 	C_IO_IN_pin(E_IO_PORT_ADDR ,E_IO_NUM );
 	
-	E_LOGIC In();
-	E_LOGIC In_turn();
+	BOOL In();
+	BOOL In_turn();
 	
 	E_IO_NUM Ret_bit()	{	return _mem_io_in_pin_bit;	}
 };
@@ -45,14 +44,12 @@ C_IO_IN_pin::C_IO_IN_pin(E_IO_PORT_ADDR _arg_io_in_pin_addr, E_IO_NUM _arg_io_in
 	Set(_arg_io_in_pin_addr, _arg_io_in_pin_bit);
 }
 
-inline E_LOGIC C_IO_IN_pin::In()
+inline BOOL C_IO_IN_pin::In()
 {
 	return C_IO_IN::In_num(_mem_io_in_pin_bit);
 }
 
-inline E_LOGIC C_IO_IN_pin::In_turn()
+inline BOOL C_IO_IN_pin::In_turn()
 {
 	return TURN_TF(C_IO_IN::In_num(_mem_io_in_pin_bit));
 }
-
-#endif

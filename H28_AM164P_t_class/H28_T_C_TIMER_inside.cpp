@@ -5,27 +5,28 @@
  H28 05 23 ver 0.1.0 publicメンバないから宣言しても意味ないよ
 */
 
-#ifndef _H28_C_TIMER_INSIDE_CPP_
-#define _H28_C_TIMER_INSIDE_CPP_ 1
+#pragma once
+
+#include "H28_AM164P_t_class.h"
 
 class C_TIMER_inside
 {
 	private:
 	uchar _mem_timer_inside_count :8;
 	uchar _mem_timer_inside_limit :8;
-	E_LOGIC _mem_timer_inside_flag  :1;
+	BOOL _mem_timer_inside_flag  :1;
 	
 	protected:
-	void Set(T_VALUE ,T_COUNT ,E_LOGIC );
+	void Set(T_VALUE ,T_COUNT ,BOOL );
 	void Start();
-	E_LOGIC Check();
+	BOOL Check();
 	void End();
 	
-	E_LOGIC Ret_flag()	{	return _mem_timer_inside_flag;	}
+	BOOL Ret_flag()	{	return _mem_timer_inside_flag;	}
 };
 
 //protected
-inline void C_TIMER_inside::Set(T_VALUE _arg_limit, T_COUNT _arg_count = 0, E_LOGIC _arg_flag = FALES)
+inline void C_TIMER_inside::Set(T_VALUE _arg_limit, T_COUNT _arg_count = 0, BOOL _arg_flag = FALES)
 {
 	//overflow
 	TCCR0A = 0;
@@ -46,7 +47,7 @@ inline void C_TIMER_inside::Start()
 	_mem_timer_inside_count = 0;
 }
 
-inline E_LOGIC C_TIMER_inside::Check()
+inline BOOL C_TIMER_inside::Check()
 {
 	if ((_mem_timer_inside_flag & CHECK_BIT_TF(TIFR0,TOV0)) == TRUE)
 	{
@@ -80,5 +81,3 @@ inline void C_TIMER_inside::End()
 	_mem_timer_inside_count = 0;
 	_mem_timer_inside_flag = FALES;
 }
-
-#endif

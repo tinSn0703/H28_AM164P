@@ -5,8 +5,9 @@
  H28 06 13 ver0.0.0
 */
 
-#ifndef _H28_I_C_IO_OUT_PIN_CPP_
-#define _H28_I_C_IO_OUT_PIN_CPP_ 1
+#pragma once
+
+#include "H28_I_C_IO_OUT.cpp"
 
 class C_IO_OUT_pin : protected C_IO_OUT
 {
@@ -20,7 +21,7 @@ class C_IO_OUT_pin : protected C_IO_OUT
 	C_IO_OUT_pin()	{}
 	C_IO_OUT_pin(E_IO_PORT_ADDR ,E_IO_NUM );
 	
-	void Out(E_LOGIC );
+	void Out(BOOL );
 	
 	void Out_on();
 	void Out_off();
@@ -46,7 +47,7 @@ C_IO_OUT_pin::C_IO_OUT_pin(E_IO_PORT_ADDR _arg_io_in_pin_addr, E_IO_NUM _arg_io_
 	Set(_arg_io_in_pin_addr, _arg_io_in_pin_bit);
 }
 
-inline void C_IO_OUT_pin::Out(E_LOGIC _arg_io_out_pin_nf)
+inline void C_IO_OUT_pin::Out(BOOL _arg_io_out_pin_nf)
 {
 	switch (_arg_io_out_pin_nf)
 	{
@@ -64,5 +65,3 @@ inline void C_IO_OUT_pin::Out_off()
 {
 	C_IO_OUT::Out_num_off(_mem_io_out_pin_bit);
 }
-
-#endif

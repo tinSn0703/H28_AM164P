@@ -3,7 +3,7 @@
 #define _H28_AM164P_H_ 1
 
 #ifndef _H28_AVR_H_
-#error "Include <H28_AVR.h>"
+#	error "Include <H28_AVR.h>"
 #endif
 
 #include "H28_AM164P_t_macro.h"
